@@ -1,8 +1,13 @@
-import React, { useState } from "react"
-import { workers } from "../api"
+import React, { useEffect, useState } from "react"
 
 const Workers = () => {
-  const [workerList, setWorkerList] = useState(workers)
+  const [workerList, setWorkerList] = useState([])
+
+  useEffect(() => {
+    fetch('http://localhost:8000/api/workers')
+      .then(res => res.json())
+      .then(json => setWorkerList(json))
+  }, [])
 
   const addWorker = () => {
     setWorkerList([
