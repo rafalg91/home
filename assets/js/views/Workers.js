@@ -1,57 +1,50 @@
 import React, { useEffect, useState, useRef } from "react"
+import Add from "./Workers/Add"
+import Search from "./Workers/Search"
 
 const Workers = () => {
   const [workerList, setWorkerList] = useState([])
   const [filteredWorkers, setFilteredWorkers] = useState([])
 
-  const input = useRef()
-
   useEffect(() => {
-    fetch('http://localhost:8000/api/workers')
-      .then(res => res.json())
-      .then(json => {
-        setWorkerList(json)
-        setFilteredWorkers(json)
-      })
+    getData()
   }, [])
 
-  const searchWorkers = (e) => {
-    e.preventDefault()
-    const workers = workerList.filter((worker) => {
-      return worker.name.includes(input.current.value)
+  const getData = () => {
+    fetch("/api/workers")
+    .then((res) => res.json())
+    .then((json) => {
+      setWorkerList(json)
+      setFilteredWorkers(json)
     })
-
-    setFilteredWorkers(workers)
   }
 
-  const addWorker = () => {
-    setWorkerList([
-      ...workerList,
-      {
-        id: workerList.length + 1,
-        name: input.current.value,
-      },
-    ])
+  const deleteWorker = (idWorker) => {
+    fetch(`/api/workers/${idWorker}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((json) => console.log(json))
+
+    setFilteredWorkers(workerList.filter(worker => {
+      return worker.id !== idWorker
+    }))
+
+    setWorkerList(workerList.filter(worker => {
+      return worker.id !== idWorker
+    }))
   }
 
   return (
     <>
       <h2 className="title is-5">Workers</h2>
-      <div className="field has-addons my-5">
-        <div className="control">
-          <input ref={input} className="input" type="text" placeholder="Find a repository" />
-        </div>
-        <div className="control">
-          <a className="button is-primary" onClick={searchWorkers}>
-            Search
-          </a>
-        </div>
-      </div>
+      <Search workers={workerList} setWorkers={setFilteredWorkers} />
       <table className="table is-bordered">
         <thead>
           <tr>
             <th>#</th>
             <th>Name</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -59,13 +52,19 @@ const Workers = () => {
             <tr key={worker.id}>
               <td>{worker.id}</td>
               <td>{worker.name}</td>
+              <td>
+                <button
+                  className="button is-danger is-small"
+                  onClick={() => deleteWorker(worker.id)}
+                >
+                  Delete
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <button className="button is-info" onClick={addWorker}>
-        Add Worker
-      </button>
+      <Add />
     </>
   )
 }
