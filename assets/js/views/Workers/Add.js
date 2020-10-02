@@ -1,6 +1,6 @@
 import React, {useRef} from "react"
 
-const Add = () => {
+const Add = ({ setWorkerList, setFilteredWorkers }) => {
   const input = useRef()
 
   const addWorker = () => {
@@ -9,8 +9,13 @@ const Add = () => {
       body: JSON.stringify({ name: input.current.value }),
       headers: { "Content-Type": "application/json" },
     })
-      .then((res) => res.json())
-      .then((json) => console.log(json))
+    .then((res) => res.json())
+    .then((json) => {
+      setWorkerList(json)
+      setFilteredWorkers(json)
+    })
+
+    input.current.value = ''
   }
 
   return (

@@ -26,20 +26,22 @@ class ApiController extends AbstractController
 
     /**
      * @Route("/api/workers/add", format="json", name="addworker")
-     * @Method("DELETE")
+     * @Method("POST")
      */
     public function addworker(Request $request)
     {
         $request->getContent();
-        $entityManager = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
 
         $worker = new Worker();
         $worker->setName($request->get('name'));
 
-        $entityManager->persist($worker);
-        $entityManager->flush();
+        $em->persist($worker);
+        $em->flush();
 
-        return new Response(json_encode($worker));
+        $workers = $em->getRepository(Worker::class)->findAll();
+
+        return new Response(json_encode($workers));
     }
 
     /**
@@ -48,12 +50,33 @@ class ApiController extends AbstractController
      */
     public function removeWorker($id)
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $worker = $entityManager->getRepository(Worker::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $rep = $em->getRepository(Worker::class);
+        $worker = $rep->find($id);
 
-        $entityManager->remove($worker);
-        $entityManager->flush();
+        $em->remove($worker);
+        $em->flush();
 
-        return new Response(json_encode($worker));
+        $workers = $rep->findAll();
+
+        return new Response(json_encode($workers));
+    }
+
+    /**
+     * @Route("/api/workers/{id}/edit", format="json", name="updateworker")
+     * @Method("PATCH")
+     */
+    public function updateWorker($id, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $rep = $em->getRepository(Worker::class);
+        $worker = $rep->find($id);
+
+        $worker->setName($request->get('name'));
+        $em->flush();
+
+        $workers = $rep->findAll();
+
+        return new Response(json_encode($workers));
     }
 }
