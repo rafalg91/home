@@ -29,43 +29,51 @@ const Workers = () => {
 
   return (
     <>
-      <h2 className="title is-5">Workers</h2>
-      <Search workers={workerList} setWorkers={setFilteredWorkers} />
-      <table className="table is-bordered">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredWorkers.map((worker) => (
-            <tr key={worker.id}>
-              <td>{worker.id}</td>
-              <td>{worker.name}</td>
-              <td>
-                <button
-                  className="button is-danger is-small"
-                  onClick={() => deleteWorker(worker.id)}
-                >
-                  Delete
-                </button>
-              </td>
-              <td>
-                <Edit
-                  setWorkerList={setWorkerList}
-                  setFilteredWorkers={setFilteredWorkers}
-                  id={worker.id}
-                  name={worker.name}
-                />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <Add setWorkerList={setWorkerList} setFilteredWorkers={setFilteredWorkers} />
+      <div className="columns">
+        <div className="column is-half">
+          <h2 className="title is-5">Workers</h2>
+          <Search workers={workerList} setWorkers={setFilteredWorkers} />
+          <table className="table is-bordered">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredWorkers.map((worker) => (
+                <tr key={worker.id}>
+                  <td>{worker.id}</td>
+                  <td>{worker.name}</td>
+                  <td>{worker.surname}</td>
+                  <td>
+                    <div className="buttons">
+                      <button
+                        className="button is-danger is-small"
+                        onClick={() => deleteWorker(worker.id)}
+                      >
+                        Delete
+                      </button>
+                      <Edit
+                        setWorkerList={setWorkerList}
+                        setFilteredWorkers={setFilteredWorkers}
+                        id={worker.id}
+                        name={worker.name}
+                        surname={worker.surname}
+                      />
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="column is-one-third">
+          <Add setWorkerList={setWorkerList} setFilteredWorkers={setFilteredWorkers} />
+        </div>
+      </div>
     </>
   )
 }

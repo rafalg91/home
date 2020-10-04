@@ -1,14 +1,14 @@
-import React, {useState, useRef} from 'react'
+import React, {useState} from 'react'
 import classNames from "classnames/dedupe"
+import { useFormik } from 'formik';
 
-const Edit = ({ setWorkerList, setFilteredWorkers, name, id }) => {
-  const input = useRef()
+const Edit = ({ setWorkerList, setFilteredWorkers, name, surname, id }) => {
   const [modal, setModal] = useState(false)
 
-  const editWorker = () => {
+  const editWorker = (data) => {
     fetch(`/api/workers/${id}/edit`, {
       method: "PATCH",
-      body: JSON.stringify({ name: input.current.value }),
+      body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
     })
     .then(res => res.json())
@@ -16,9 +16,18 @@ const Edit = ({ setWorkerList, setFilteredWorkers, name, id }) => {
       setWorkerList(json)
       setFilteredWorkers(json)
     })
-
-    setModal(false)
   }
+
+  const formik = useFormik({
+    initialValues: {
+      name: name,
+      surname: surname,
+    },
+    onSubmit: (values) => {
+      editWorker(values)
+      setModal(false)
+    }
+  })
 
   return (
     <>
@@ -28,24 +37,44 @@ const Edit = ({ setWorkerList, setFilteredWorkers, name, id }) => {
       <div className={classNames('modal', {'is-active': modal})}>
         <div className="modal-background" onClick={() => setModal(false)}></div>
         <div className="modal-card">
-          <header className="modal-card-head">
-            <p className="modal-card-title">Edit Worker</p>
-            <button className="delete" aria-label="close" onClick={() => setModal(false)}></button>
-          </header>
-          <section className="modal-card-body">
-            <div className="control">
-              <input
-                ref={input}
-                className="input"
-                type="text"
-                placeholder={name}
-              />
-            </div>
-          </section>
-          <footer className="modal-card-foot">
-            <button className="button is-success"onClick={editWorker}>Save changes</button>
-            <button className="button" onClick={() => setModal(false)}>Cancel</button>
-          </footer>
+          <form onSubmit={formik.handleSubmit}>
+            <header className="modal-card-head">
+              <p className="modal-card-title">Edit Worker</p>
+              <button className="delete" aria-label="close" onClick={() => setModal(false)}></button>
+            </header>
+            <section className="modal-card-body">
+              <div className="field">
+                <label htmlFor="name" className="label">Name</label>
+                <div className="control">
+                  <input
+                    name="name"
+                    className="input"
+                    placeholder="Name..."
+                    type="text"
+                    onChange={formik.handleChange}
+                    value={formik.values.name}
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <label htmlFor="surname" className="label">Surname</label>
+                <div className="control">
+                  <input
+                    name="surname"
+                    className="input"
+                    placeholder="surname..."
+                    type="text"
+                    onChange={formik.handleChange}
+                    value={formik.values.surname}
+                  />
+                </div>
+              </div>
+            </section>
+            <footer className="modal-card-foot">
+              <button type="submit" className="button is-success">Save changes</button>
+              <button className="button" onClick={() => setModal(false)}>Cancel</button>
+            </footer>
+          </form>
         </div>
       </div>
     </>

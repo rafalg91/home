@@ -35,6 +35,7 @@ class ApiController extends AbstractController
 
         $worker = new Worker();
         $worker->setName($request->get('name'));
+        $worker->setSurname($request->get('surname'));
 
         $em->persist($worker);
         $em->flush();
@@ -73,6 +74,7 @@ class ApiController extends AbstractController
         $worker = $rep->find($id);
 
         $worker->setName($request->get('name'));
+        $worker->setSurname($request->get('surname'));
         $em->flush();
 
         $workers = $rep->findAll();

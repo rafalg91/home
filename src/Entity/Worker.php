@@ -23,11 +23,17 @@ class Worker implements JsonSerializable
      */
     private $name;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $surname;
+
     public function jsonSerialize()
     {
         return array(
             'id' => $this->id,
             'name' => $this->name,
+            'surname' => $this->surname,
         );
     }
 
@@ -44,6 +50,18 @@ class Worker implements JsonSerializable
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSurname(): ?string
+    {
+        return $this->surname;
+    }
+
+    public function setSurname(string $surname): self
+    {
+        $this->surname = $surname;
 
         return $this;
     }

@@ -12,7 +12,7 @@ const Search = ({ workers, setWorkers }) => {
   }
 
   return (
-    <div className="field has-addons my-5">
+    <div className="field search my-5">
       <div className="control">
         <input
           className="input"
