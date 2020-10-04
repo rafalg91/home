@@ -5,7 +5,10 @@ const Search = ({ workers, setWorkers }) => {
   const searchWorkers = (e) => {
     e.preventDefault()
     const filteredWorkers = workers.filter((worker) => {
-      return worker.name.toLowerCase().includes(e.currentTarget.value.toLowerCase())
+      return (
+        worker.name.toLowerCase().includes(e.currentTarget.value.toLowerCase()) ||
+        worker.surname.toLowerCase().includes(e.currentTarget.value.toLowerCase())
+      )
     })
 
     setWorkers(filteredWorkers)
