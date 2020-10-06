@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import Add from "./Workers/Add"
 import Search from "./Workers/Search"
 import Edit from "./Workers/Edit"
+import Skills from "./Workers/Skills"
 
 const Workers = () => {
   const [workerList, setWorkerList] = useState([])
@@ -39,6 +40,7 @@ const Workers = () => {
                 <th>#</th>
                 <th>Name</th>
                 <th>Surname</th>
+                <th>Skills</th>
                 <th></th>
               </tr>
             </thead>
@@ -48,6 +50,9 @@ const Workers = () => {
                   <td>{worker.id}</td>
                   <td>{worker.name}</td>
                   <td>{worker.surname}</td>
+                  <td>
+                    <Skills skills={worker.skills} />
+                  </td>
                   <td>
                     <div className="buttons">
                       <button
