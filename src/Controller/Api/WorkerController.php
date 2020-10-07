@@ -7,8 +7,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
-use App\Entity\Worker;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Entity\Worker;
+use App\Entity\Skill;
 
 class WorkerController extends AbstractController
 {
@@ -32,6 +33,23 @@ class WorkerController extends AbstractController
     public function skills($id)
     {
         $worker = $this->getDoctrine()->getRepository(Worker::class)->find($id);
+        $skills = $worker->getSkills()->toArray();
+
+        return new JsonResponse($skills);
+    }
+
+    /**
+     * @Route("/api/workers/{id}/skills/{id_skill}", name="removeworkerskill")
+     * @Method("DELETE")
+     */
+    public function removeSkills($id, $id_skill)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $worker = $em->getRepository(Worker::class)->find($id);
+        $skill = $em->getRepository(Skill::class)->find($id_skill);
+        $worker->removeSkill($skill);
+        $em->flush();
+
         $skills = $worker->getSkills()->toArray();
 
         return new JsonResponse($skills);

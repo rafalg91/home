@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import Add from "./Workers/Add"
 import Search from "./Workers/Search"
 import Edit from "./Workers/Edit"
+import Delete from "./Workers/Delete"
 import Skills from "./Workers/Skills"
 
 const Workers = () => {
@@ -16,17 +17,6 @@ const Workers = () => {
       setFilteredWorkers(json)
     })
   }, [])
-
-  const deleteWorker = (id) => {
-    fetch(`/api/workers/${id}`, {
-      method: "DELETE",
-    })
-    .then((res) => res.json())
-    .then((json) => {
-      setWorkerList(json)
-      setFilteredWorkers(json)
-    })
-  }
 
   return (
     <>
@@ -51,16 +41,15 @@ const Workers = () => {
                   <td>{worker.name}</td>
                   <td>{worker.surname}</td>
                   <td>
-                    <Skills skills={worker.skills} />
+                    <Skills skills={worker.skills} worker={worker.id} />
                   </td>
                   <td>
                     <div className="buttons">
-                      <button
-                        className="button is-danger is-small"
-                        onClick={() => deleteWorker(worker.id)}
-                      >
-                        Delete
-                      </button>
+                      <Delete
+                        setWorkerList={setWorkerList}
+                        setFilteredWorkers={setFilteredWorkers}
+                        id={worker.id}
+                      />
                       <Edit
                         setWorkerList={setWorkerList}
                         setFilteredWorkers={setFilteredWorkers}
