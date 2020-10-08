@@ -60,7 +60,6 @@ const Workers = () => {
                       />
                       <AddSkill
                         worker={worker.id}
-                        changeSkills={setSkills}
                       />
                     </div>
                   </td>
