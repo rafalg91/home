@@ -4,6 +4,7 @@ import Search from "./Workers/Search"
 import Edit from "./Workers/Edit"
 import Delete from "./Workers/Delete"
 import Skills from "./Workers/Skills"
+import AddSkill from "./Workers/AddSkill"
 
 const Workers = () => {
   const [workerList, setWorkerList] = useState([])
@@ -21,8 +22,8 @@ const Workers = () => {
   return (
     <>
       <div className="columns">
-        <div className="column is-half">
-          <h2 className="title is-5">Workers</h2>
+        <div className="column is-7">
+          <h2 className="title is-6">Workers</h2>
           <Search workers={workerList} setWorkers={setFilteredWorkers} />
           <table className="table is-bordered">
             <thead>
@@ -57,6 +58,10 @@ const Workers = () => {
                         name={worker.name}
                         surname={worker.surname}
                       />
+                      <AddSkill
+                        worker={worker.id}
+                        changeSkills={setSkills}
+                      />
                     </div>
                   </td>
                 </tr>
@@ -64,7 +69,7 @@ const Workers = () => {
             </tbody>
           </table>
         </div>
-        <div className="column is-one-third">
+        <div className="column is-4">
           <Add setWorkerList={setWorkerList} setFilteredWorkers={setFilteredWorkers} />
         </div>
       </div>

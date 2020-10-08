@@ -9,3 +9,14 @@ $primary: #3273dc;
 .search {
   max-width: 300px;
 }
+
+.is-plus {
+  cursor: pointer;
+  padding: 5px !important;
+  font-weight: bold;
+  height: 20px !important;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}

@@ -56,6 +56,27 @@ class WorkerController extends AbstractController
     }
 
     /**
+     * @Route("/api/workers/add_skill", format="json", name="addworkerskill")
+     * @Method("POST")
+     */
+    public function addSkills(Request $request)
+    {
+        $request->getContent();
+        $id_worker = $request->get('worker');
+        $id_skill = $request->get('skill');
+
+        $em = $this->getDoctrine()->getManager();
+        $worker = $em->getRepository(Worker::class)->find($id_worker);
+        $skill = $em->getRepository(Skill::class)->find($id_skill);
+        $worker->addSkill($skill);
+        $em->flush();
+
+        $skills = $worker->getSkills()->toArray();
+
+        return new JsonResponse($skills);
+    }
+
+    /**
      * @Route("/api/workers/add", format="json", name="addworker")
      * @Method("POST")
      */
