@@ -50,9 +50,9 @@ class WorkerController extends AbstractController
         $worker->removeSkill($skill);
         $em->flush();
 
-        $skills = $worker->getSkills()->toArray();
+        //$skills = $worker->getSkills()->toArray();
 
-        return new JsonResponse($skills);
+        return new JsonResponse($worker);
     }
 
     /**
@@ -71,9 +71,9 @@ class WorkerController extends AbstractController
         $worker->addSkill($skill);
         $em->flush();
 
-        $skills = $worker->getSkills()->toArray();
+        //$skills = $worker->getSkills()->toArray();
 
-        return new JsonResponse($skills);
+        return new JsonResponse($worker);
     }
 
     /**
@@ -110,9 +110,9 @@ class WorkerController extends AbstractController
         $em->remove($worker);
         $em->flush();
 
-        $workers = $rep->findAll();
+        //$workers = $rep->findAll();
 
-        return new JsonResponse($workers);
+        return new JsonResponse($worker);
     }
 
     /**
@@ -129,8 +129,8 @@ class WorkerController extends AbstractController
         $worker->setSurname($request->get('surname'));
         $em->flush();
 
-        $workers = $rep->findAll();
+        //$workers = $rep->findAll();
 
-        return new JsonResponse($workers);
+        return new JsonResponse($worker);
     }
 }

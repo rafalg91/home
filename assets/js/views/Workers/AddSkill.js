@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import classNames from "classnames/dedupe"
 
-const AddSkill = ({ worker }) => {
+const AddSkill = ({ worker, setWorker }) => {
   const [skills, setSkills] = useState([])
   const [dropdown, setDropdown] = useState(false)
 
@@ -26,6 +26,10 @@ const AddSkill = ({ worker }) => {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
+    })
+    .then(res => res.json())
+    .then(json => {
+      setWorker(json)
     })
   }
 

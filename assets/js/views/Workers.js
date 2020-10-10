@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import Add from "./Workers/Add"
 import Search from "./Workers/Search"
+import Worker from "./Workers/Worker"
 import Edit from "./Workers/Edit"
 import Delete from "./Workers/Delete"
 import Skills from "./Workers/Skills"
@@ -37,33 +38,34 @@ const Workers = () => {
             </thead>
             <tbody>
               {filteredWorkers.map((worker) => (
-                <tr key={worker.id}>
-                  <td>{worker.id}</td>
-                  <td>{worker.name}</td>
-                  <td>{worker.surname}</td>
-                  <td>
-                    <Skills skills={worker.skills} worker={worker.id} />
-                  </td>
-                  <td>
-                    <div className="buttons">
-                      <Delete
-                        setWorkerList={setWorkerList}
-                        setFilteredWorkers={setFilteredWorkers}
-                        id={worker.id}
-                      />
-                      <Edit
-                        setWorkerList={setWorkerList}
-                        setFilteredWorkers={setFilteredWorkers}
-                        id={worker.id}
-                        name={worker.name}
-                        surname={worker.surname}
-                      />
-                      <AddSkill
-                        worker={worker.id}
-                      />
-                    </div>
-                  </td>
-                </tr>
+                <Worker key={worker.id} data={worker} />
+                // <tr key={worker.id}>
+                //   <td>{worker.id}</td>
+                //   <td>{worker.name}</td>
+                //   <td>{worker.surname}</td>
+                //   <td>
+                //     <Skills skills={worker.skills} worker={worker.id} />
+                //   </td>
+                //   <td>
+                //     <div className="buttons">
+                //       <Delete
+                //         setWorkerList={setWorkerList}
+                //         setFilteredWorkers={setFilteredWorkers}
+                //         id={worker.id}
+                //       />
+                //       <Edit
+                //         setWorkerList={setWorkerList}
+                //         setFilteredWorkers={setFilteredWorkers}
+                //         id={worker.id}
+                //         name={worker.name}
+                //         surname={worker.surname}
+                //       />
+                //       <AddSkill
+                //         worker={worker.id}
+                //       />
+                //     </div>
+                //   </td>
+                // </tr>
               ))}
             </tbody>
           </table>
