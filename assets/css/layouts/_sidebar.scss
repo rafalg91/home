@@ -1,0 +1,15 @@
+.sidebar {
+  position: fixed;
+  background-color: $primary;
+  width: gutter(25);
+  height: 100vh;
+  padding: gutter(4) gutter(3);
+  z-index: 900;
+  color: $white;
+
+  &__title {
+    font-weight: $regular;
+    font-family: $font-title;
+    font-size: 1.5rem;
+  }
+}

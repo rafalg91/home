@@ -29,16 +29,16 @@ const Skills = () => {
 
   return (
     <>
-      <div className="columns">
-        <div className="column is-half">
-          <h2 className="title is-5">Skills</h2>
-          <Search skills={skillList} setSkills={setFilteredSkills} />
-          <table className="table is-bordered">
+      <h2 className="title">Skills</h2>
+      <Search skills={skillList} setSkills={setFilteredSkills} />
+      <div className="panels">
+        <div className="panel">
+          <table className="table">
             <thead>
               <tr>
                 <th>#</th>
                 <th>Name</th>
-                <th></th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -68,7 +68,7 @@ const Skills = () => {
             </tbody>
           </table>
         </div>
-        <div className="column is-one-third">
+        <div className="panel">
           <Add setSkillList={setSkillList} setFilteredSkills={setFilteredSkills} />
         </div>
       </div>

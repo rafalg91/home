@@ -18,18 +18,18 @@ const Workers = () => {
 
   return (
     <>
-      <div className="columns">
-        <div className="column is-7">
-          <h2 className="title is-6">Workers</h2>
-          <Search workers={workerList} setWorkers={setFilteredWorkers} />
-          <table className="table is-bordered">
+      <h2 className="title">Workers</h2>
+      <Search workers={workerList} setWorkers={setFilteredWorkers} />
+      <div className="panels">
+        <div className="panel">
+          <table className="table">
             <thead>
               <tr>
                 <th>#</th>
                 <th>Name</th>
                 <th>Surname</th>
                 <th>Skills</th>
-                <th></th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -39,7 +39,7 @@ const Workers = () => {
             </tbody>
           </table>
         </div>
-        <div className="column is-4">
+        <div className="panel">
           <Add setWorkerList={setWorkerList} setFilteredWorkers={setFilteredWorkers} />
         </div>
       </div>

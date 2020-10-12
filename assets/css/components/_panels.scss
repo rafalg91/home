@@ -1,0 +1,12 @@
+.panel {
+  display: block;
+  box-shadow: $shadow;
+  background-color: $white;
+  padding: gutter(3);
+}
+
+.panels {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: gutter(2);
+}

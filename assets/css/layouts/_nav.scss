@@ -1,0 +1,28 @@
+.nav {
+  $root: &;
+  padding: gutter(4) 0;
+
+  &__item {
+    padding: gutter(1) 0;
+  }
+
+  &__icon {
+    padding-right: gutter(1);
+  }
+
+  &__link {
+    display: block;
+    color: rgba($white, 0.6);
+    transition: color, transform $transition;
+
+    &--active {
+      color: $white;
+      font-weight: $semi-bold;
+    }
+
+    &:hover {
+      transform: translateX(4px);
+      color: $secondary;
+    }
+  }
+}
