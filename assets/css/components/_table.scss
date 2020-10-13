@@ -1,3 +1,30 @@
 .table {
   width: 100%;
+  background-color: transparent;
+  background: $white;
+  border: 0;
+
+  thead {
+    tr {
+      border: $line;
+      border-bottom-width: 2px;
+    }
+
+    th {
+      padding: gutter(2);
+      border: 0;
+      color: $primary;
+    }
+  }
+
+  tbody {
+    tr {
+      border: $line;
+    }
+
+    td {
+      padding: gutter(2);
+      border: 0;
+    }
+  }
 }

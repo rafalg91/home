@@ -21,7 +21,7 @@ const Workers = () => {
       <h2 className="title">Workers</h2>
       <Search workers={workerList} setWorkers={setFilteredWorkers} />
       <div className="panels">
-        <div className="panel">
+        <div className="panel panel--table">
           <table className="table">
             <thead>
               <tr>

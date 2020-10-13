@@ -32,7 +32,7 @@ const Skills = () => {
       <h2 className="title">Skills</h2>
       <Search skills={skillList} setSkills={setFilteredSkills} />
       <div className="panels">
-        <div className="panel">
+        <div className="panel panel--table">
           <table className="table">
             <thead>
               <tr>

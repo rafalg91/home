@@ -1,12 +1,20 @@
 .panel {
   display: block;
-  box-shadow: $shadow;
+  box-shadow: none;
   background-color: $white;
   padding: gutter(3);
+  border: $line;
+  border-radius: 0;
+
+  &--table {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+  }
 }
 
 .panels {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 65% 35%;
   gap: gutter(2);
 }
