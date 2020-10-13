@@ -35,9 +35,21 @@ class Worker implements JsonSerializable
      */
     private $skills;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Log::class, mappedBy="worker")
+     */
+    private $Logs;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Access::class, inversedBy="workers")
+     */
+    private $access;
+
     public function __construct()
     {
         $this->skills = new ArrayCollection();
+        $this->Logs = new ArrayCollection();
+        $this->access = new ArrayCollection();
     }
 
     public function jsonSerialize()
@@ -100,6 +112,63 @@ class Worker implements JsonSerializable
     {
         if ($this->skills->contains($skill)) {
             $this->skills->removeElement($skill);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Log[]
+     */
+    public function getLogs(): Collection
+    {
+        return $this->Logs;
+    }
+
+    public function addLog(Log $log): self
+    {
+        if (!$this->Logs->contains($log)) {
+            $this->Logs[] = $log;
+            $log->setWorker($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLog(Log $log): self
+    {
+        if ($this->Logs->contains($log)) {
+            $this->Logs->removeElement($log);
+            // set the owning side to null (unless already changed)
+            if ($log->getWorker() === $this) {
+                $log->setWorker(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Access[]
+     */
+    public function getAccess(): Collection
+    {
+        return $this->access;
+    }
+
+    public function addAccess(Access $access): self
+    {
+        if (!$this->access->contains($access)) {
+            $this->access[] = $access;
+        }
+
+        return $this;
+    }
+
+    public function removeAccess(Access $access): self
+    {
+        if ($this->access->contains($access)) {
+            $this->access->removeElement($access);
         }
 
         return $this;
