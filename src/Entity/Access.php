@@ -6,11 +6,12 @@ use App\Repository\AccessRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
  * @ORM\Entity(repositoryClass=AccessRepository::class)
  */
-class Access
+class Access implements JsonSerializable
 {
     /**
      * @ORM\Id
@@ -38,6 +39,14 @@ class Access
     {
         $this->log = new ArrayCollection();
         $this->workers = new ArrayCollection();
+    }
+
+    public function jsonSerialize()
+    {
+        return array(
+            'id' => $this->id,
+            'name' => $this->name,
+        );
     }
 
     public function getId(): ?int

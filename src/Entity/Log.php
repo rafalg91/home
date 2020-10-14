@@ -4,11 +4,12 @@ namespace App\Entity;
 
 use App\Repository\LogRepository;
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
  * @ORM\Entity(repositoryClass=LogRepository::class)
  */
-class Log
+class Log implements JsonSerializable
 {
     /**
      * @ORM\Id
@@ -33,6 +34,22 @@ class Log
      * @ORM\Column(type="boolean")
      */
     private $status;
+
+    public function jsonSerialize()
+    {
+        return array(
+            'id' => $this->id,
+            'status' => $this->status,
+            'worker' => array(
+                'id' => $this->getWorker()->getId(),
+                'name' => $this->getWorker()->getFullname(),
+            ),
+            'access' => array(
+                'id' => $this->getAccess()->getId(),
+                'name' => $this->getAccess()->getName(),
+            )
+        );
+    }
 
     public function getId(): ?int
     {

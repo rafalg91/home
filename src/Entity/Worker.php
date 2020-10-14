@@ -91,6 +91,11 @@ class Worker implements JsonSerializable
         return $this;
     }
 
+    public function getFullname(): ?string
+    {
+        return $this->name.' '.$this->surname;
+    }
+
     /**
      * @return Collection|Skill[]
      */
