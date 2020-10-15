@@ -6,6 +6,7 @@ import Worker from "./Workers/Worker"
 const Workers = () => {
   const [workerList, setWorkerList] = useState([])
   const [filteredWorkers, setFilteredWorkers] = useState([])
+  const [getSkills, setGetSkills] = useState([])
 
   useEffect(() => {
     fetch("/api/workers")
@@ -13,6 +14,12 @@ const Workers = () => {
     .then((json) => {
       setWorkerList(json)
       setFilteredWorkers(json)
+    })
+
+    fetch("/api/skills")
+    .then((res) => res.json())
+    .then((json) => {
+      setGetSkills(json)
     })
   }, [])
 
@@ -34,7 +41,7 @@ const Workers = () => {
             </thead>
             <tbody>
               {filteredWorkers.map((worker) => (
-                <Worker key={worker.id} data={worker} />
+                <Worker key={worker.id} data={worker} getSkills={getSkills} />
               ))}
             </tbody>
           </table>

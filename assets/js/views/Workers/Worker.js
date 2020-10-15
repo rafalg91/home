@@ -4,7 +4,7 @@ import Delete from "./Delete"
 import Skills from "./Skills"
 import AddSkill from "./AddSkill"
 
-const Worker = ({ data }) => {
+const Worker = ({ data, getSkills }) => {
   const [worker, setWorker] = useState(data)
 
   return (
@@ -15,13 +15,13 @@ const Worker = ({ data }) => {
           <td>{worker.name}</td>
           <td>{worker.surname}</td>
           <td>
-            <Skills skills={worker.skills} worker={worker.id} setWorker={setWorker}/>
+            <Skills getSkills={getSkills} skills={worker.skills} worker={worker.id} setWorker={setWorker}/>
           </td>
           <td>
             <div className="buttons">
               <Edit id={worker.id} name={worker.name} surname={worker.surname} setWorker={setWorker}/>
               <Delete id={worker.id} setWorker={setWorker} />
-              <AddSkill worker={worker.id} setWorker={setWorker} />
+              <AddSkill worker={worker.id} setWorker={setWorker} getSkills={getSkills} />
             </div>
           </td>
         </tr>

@@ -1,17 +1,8 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import classNames from "classnames/dedupe"
 
-const AddSkill = ({ worker, setWorker }) => {
-  const [skills, setSkills] = useState([])
+const AddSkill = ({ getSkills, worker, setWorker }) => {
   const [dropdown, setDropdown] = useState(false)
-
-  useEffect(() => {
-    fetch("/api/skills")
-      .then((res) => res.json())
-      .then((json) => {
-        setSkills(json)
-      })
-  }, [])
 
   const add = (e, skill) => {
     e.preventDefault()
@@ -47,7 +38,7 @@ const AddSkill = ({ worker, setWorker }) => {
       </div>
       <div className="dropdown-menu" id="dropdown-menu" role="menu">
         <div className="dropdown-content">
-          {skills.map((skill) => (
+          {getSkills.map((skill) => (
             <a href="#" className="dropdown-item" key={skill.id} onClick={(e) => add(e, skill.id)}>
               {skill.name}
             </a>
