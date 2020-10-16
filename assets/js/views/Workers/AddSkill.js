@@ -24,6 +24,15 @@ const AddSkill = ({ getSkills, worker, setWorker }) => {
     })
   }
 
+  const activeDropdown = () => {
+    const elements = document.querySelectorAll('.dropdown.is-active')
+    elements.forEach(item => {
+      item.classList.remove('is-active')
+    })
+
+    setDropdown(!dropdown)
+  }
+
   return (
     <div className={classNames("dropdown", { "is-active": dropdown })}>
       <div className="dropdown-trigger">
@@ -31,7 +40,7 @@ const AddSkill = ({ getSkills, worker, setWorker }) => {
           className="button is-success is-small"
           aria-haspopup="true"
           aria-controls="dropdown-menu"
-          onClick={() => setDropdown(!dropdown)}
+          onClick={activeDropdown}
         >
           <span>Add skill</span>
         </button>

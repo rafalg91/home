@@ -1,5 +1,17 @@
 import React from "react"
 import { useFormik } from 'formik';
+import classNames from "classnames/dedupe"
+
+const validate = values => {
+  const errors = {};
+  if (/^ *$/.test(values.name)) {
+    errors.name = 'Required';
+  } else if (values.name.length < 2) {
+    errors.name = 'Must be at least 2 characters';
+  }
+
+  return errors;
+};
 
 const Add = ({ setSkillList, setFilteredSkills }) => {
   const addSkill = (data) => {
@@ -19,6 +31,7 @@ const Add = ({ setSkillList, setFilteredSkills }) => {
     initialValues: {
       name: '',
     },
+    validate,
     onSubmit: (values, { resetForm }) => {
       addSkill(values)
       resetForm()
@@ -34,17 +47,18 @@ const Add = ({ setSkillList, setFilteredSkills }) => {
           <div className="control">
             <input
               name="name"
-              className="input"
+              className={classNames('input', {'is-danger': formik.errors.name})}
               placeholder="Name..."
               type="text"
               onChange={formik.handleChange}
               value={formik.values.name}
             />
           </div>
+          {formik.errors.name ? <p className="help is-danger">{formik.errors.name}</p> : null}
         </div>
         <div className="field">
           <div className="control mt-5">
-            <button type="submit" className="button is-primary">
+            <button type="submit" className={classNames('button is-primary', {'is-loading': formik.isSubmitting})} disabled={formik.isSubmitting}>
               Add skill
             </button>
           </div>

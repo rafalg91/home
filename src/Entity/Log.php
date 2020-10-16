@@ -35,11 +35,17 @@ class Log implements JsonSerializable
      */
     private $status;
 
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $date;
+
     public function jsonSerialize()
     {
         return array(
             'id' => $this->id,
             'status' => $this->status,
+            'date' => $this->date->format('Y-m-d'),
             'worker' => array(
                 'id' => $this->getWorker()->getId(),
                 'name' => $this->getWorker()->getFullname(),
@@ -88,6 +94,18 @@ class Log implements JsonSerializable
     public function setStatus(bool $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
 
         return $this;
     }
