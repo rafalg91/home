@@ -12,9 +12,12 @@ const Skills = () => {
     .then((res) => res.json())
     .then((json) => {
       setSkillList(json)
-      setFilteredSkills(json)
     })
   }, [])
+
+  useEffect(() => {
+    setFilteredSkills(skillList)
+  }, [skillList])
 
   const deleteSkill = (id) => {
     fetch(`/api/skills/${id}`, {
@@ -56,7 +59,6 @@ const Skills = () => {
                       </button>
                       <Edit
                         setSkillList={setSkillList}
-                        setFilteredSkills={setFilteredSkills}
                         id={skill.id}
                         name={skill.name}
                         surname={skill.surname}
@@ -69,7 +71,7 @@ const Skills = () => {
           </table>
         </div>
         <div className="panel">
-          <Add setSkillList={setSkillList} setFilteredSkills={setFilteredSkills} />
+          <Add setSkillList={setSkillList} />
         </div>
       </div>
     </>

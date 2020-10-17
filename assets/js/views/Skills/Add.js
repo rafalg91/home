@@ -13,7 +13,7 @@ const validate = values => {
   return errors;
 };
 
-const Add = ({ setSkillList, setFilteredSkills }) => {
+const Add = ({ setSkillList }) => {
   const addSkill = (data) => {
     fetch("/api/skills/add", {
       method: "POST",
@@ -23,7 +23,6 @@ const Add = ({ setSkillList, setFilteredSkills }) => {
     .then((res) => res.json())
     .then((json) => {
       setSkillList(json)
-      setFilteredSkills(json)
     })
   }
 

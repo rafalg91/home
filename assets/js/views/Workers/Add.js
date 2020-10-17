@@ -1,7 +1,7 @@
 import React from "react"
 import { useFormik } from 'formik';
 
-const Add = ({ setWorkerList, setFilteredWorkers }) => {
+const Add = ({ setWorkerList }) => {
   const addWorker = (data) => {
     fetch("/api/workers/add", {
       method: "POST",
@@ -11,7 +11,6 @@ const Add = ({ setWorkerList, setFilteredWorkers }) => {
     .then((res) => res.json())
     .then((json) => {
       setWorkerList(json)
-      setFilteredWorkers(json)
     })
   }
 

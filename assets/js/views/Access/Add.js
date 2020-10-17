@@ -20,6 +20,7 @@ const Add = ({refresh}) => {
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
     })
+    setData(data)
   }
 
   const formik = useFormik({

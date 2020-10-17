@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Entity\Worker;
 use App\Entity\Skill;
+use App\Entity\Access;
 
 class WorkerController extends AbstractController
 {
@@ -48,6 +49,23 @@ class WorkerController extends AbstractController
         $worker = $em->getRepository(Worker::class)->find($id);
         $skill = $em->getRepository(Skill::class)->find($id_skill);
         $worker->removeSkill($skill);
+        $em->flush();
+
+        //$skills = $worker->getSkills()->toArray();
+
+        return new JsonResponse($worker);
+    }
+
+    /**
+     * @Route("/api/workers/{id}/access/{id_access}", name="removeworkeraccess")
+     * @Method("DELETE")
+     */
+    public function removeAccess($id, $id_access)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $worker = $em->getRepository(Worker::class)->find($id);
+        $access = $em->getRepository(Access::class)->find($id_access);
+        $worker->removeAccess($access);
         $em->flush();
 
         //$skills = $worker->getSkills()->toArray();

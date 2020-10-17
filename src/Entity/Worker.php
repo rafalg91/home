@@ -59,6 +59,7 @@ class Worker implements JsonSerializable
             'name' => $this->name,
             'surname' => $this->surname,
             'skills' => array_values($this->skills->toArray()),
+            'access' => array_values($this->access->toArray()),
         );
     }
 

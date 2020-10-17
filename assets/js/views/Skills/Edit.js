@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import classNames from "classnames/dedupe"
 import { useFormik } from 'formik';
 
-const Edit = ({ setSkillList, setFilteredSkills, name, id }) => {
+const Edit = ({ setSkillList, name, id }) => {
   const [modal, setModal] = useState(false)
 
   const editSkill = (data) => {
@@ -14,7 +14,6 @@ const Edit = ({ setSkillList, setFilteredSkills, name, id }) => {
     .then(res => res.json())
     .then(json => {
       setSkillList(json)
-      setFilteredSkills(json)
     })
   }
 
