@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react"
+import useFetch from '../api/useFetch'
 import Add from "./Workers/Add"
 import Search from "./Workers/Search"
 import Worker from "./Workers/Worker"
 
+
 const Workers = () => {
   const [workerList, setWorkerList] = useState([])
   const [filteredWorkers, setFilteredWorkers] = useState([])
-  const [getSkills, setGetSkills] = useState([])
+  const getSkills = useFetch('skills')
 
   useEffect(() => {
     fetch("/api/workers")
@@ -14,12 +16,6 @@ const Workers = () => {
     .then((json) => {
       setWorkerList(json)
       setFilteredWorkers(json)
-    })
-
-    fetch("/api/skills")
-    .then((res) => res.json())
-    .then((json) => {
-      setGetSkills(json)
     })
   }, [])
 

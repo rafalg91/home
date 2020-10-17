@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import moment from "moment"
+import useFetch from "../api/useFetch"
 
 const Logs = () => {
-  const [logs, setLogs] = useState([])
-
-  useEffect(() => {
-    fetch("/api/logs")
-      .then((res) => res.json())
-      .then((json) => setLogs(json))
-  }, [])
+  const logs = useFetch('logs')
 
   return (
     <>
@@ -36,9 +31,9 @@ const Logs = () => {
                 <td>{log.access.name}</td>
                 <td>
                   {log.status ? (
-                    <span class="tag is-success is-light">added</span>
+                    <span className="tag is-success is-light">added</span>
                   ) : (
-                    <span class="tag is-danger is-light">removed</span>
+                    <span className="tag is-danger is-light">removed</span>
                   )}
                 </td>
               </tr>
