@@ -3,7 +3,7 @@ import moment from "moment"
 import useFetch from "../api/useFetch"
 
 const Logs = () => {
-  const logs = useFetch('logs')
+  const [logs] = useFetch('logs')
 
   return (
     <>

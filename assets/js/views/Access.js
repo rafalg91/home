@@ -3,7 +3,7 @@ import useFetch from "../api/useFetch"
 import Add from "./Access/Add"
 
 const Access = () => {
-  const access = useFetch("access")
+  const [access, refresh] = useFetch("access")
 
   return (
     <>
@@ -36,7 +36,7 @@ const Access = () => {
           </table>
         </div>
         <div className="panel">
-          <Add />
+          <Add refresh={refresh} />
         </div>
       </div>
     </>

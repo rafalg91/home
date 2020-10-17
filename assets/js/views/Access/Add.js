@@ -13,9 +13,9 @@ const validate = values => {
   return errors;
 };
 
-const Add = () => {
+const Add = ({refresh}) => {
   const addAccess = (data) => {
-    fetch("/api/access/add", {
+    return fetch("/api/access/add", {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
@@ -27,9 +27,10 @@ const Add = () => {
       name: '',
     },
     validate,
-    onSubmit: (values, { resetForm }) => {
-      addAccess(values)
+    onSubmit: async (values, { resetForm }) => {
+      await addAccess(values)
       resetForm()
+      refresh()
     }
   })
 
