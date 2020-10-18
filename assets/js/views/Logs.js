@@ -36,11 +36,6 @@ const Logs = () => {
                   </td>
                 </tr>
               ))}
-            {!logs.length && (
-              <tr>
-                <td>No logs</td>
-              </tr>
-            )}
           </tbody>
         </table>
       </div>

@@ -36,11 +36,6 @@ const Skills = () => {
                   </td>
                 </tr>
               ))}
-              {!filteredSkills.length && (
-                <tr>
-                  <td>No Skills</td>
-                </tr>
-              )}
             </tbody>
           </table>
         </div>
