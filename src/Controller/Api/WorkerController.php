@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Worker;
 use App\Entity\Skill;
 use App\Entity\Access;
+use App\Entity\Log;
 
 class WorkerController extends AbstractController
 {
@@ -63,13 +64,21 @@ class WorkerController extends AbstractController
      */
     public function removeAccess($id, $id_access)
     {
+        $date = new \DateTime();
+
         $em = $this->getDoctrine()->getManager();
         $worker = $em->getRepository(Worker::class)->find($id);
         $access = $em->getRepository(Access::class)->find($id_access);
         $worker->removeAccess($access);
-        $em->flush();
 
-        //$skills = $worker->getSkills()->toArray();
+        $log = new Log();
+        $log->setDate($date);
+        $log->setAccess($access);
+        $log->setWorker($worker);
+        $log->setStatus(false);
+
+        $em->persist($log);
+        $em->flush();
 
         return new JsonResponse($worker);
     }
@@ -99,6 +108,8 @@ class WorkerController extends AbstractController
      */
     public function addAccess(Request $request, EntityManagerInterface $em)
     {
+        $date = new \DateTime();
+
         $request->getContent();
         $id_worker = $request->get('worker');
         $id_access = $request->get('access');
@@ -106,6 +117,14 @@ class WorkerController extends AbstractController
         $worker = $em->getRepository(Worker::class)->find($id_worker);
         $access = $em->getRepository(Access::class)->find($id_access);
         $worker->addAccess($access);
+
+        $log = new Log();
+        $log->setDate($date);
+        $log->setAccess($access);
+        $log->setWorker($worker);
+        $log->setStatus(true);
+
+        $em->persist($log);
         $em->flush();
 
         return new JsonResponse($worker);

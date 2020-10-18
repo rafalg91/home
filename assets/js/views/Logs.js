@@ -3,7 +3,7 @@ import moment from "moment"
 import useFetch from "../api/useFetch"
 
 const Logs = () => {
-  const [logs] = useFetch('logs')
+  const [logs] = useFetch("logs")
 
   return (
     <>
@@ -19,11 +19,7 @@ const Logs = () => {
         </thead>
         <tbody>
           {logs
-            .sort(
-              (a, b) =>
-                moment(b.date).format("YYYYMMDD") -
-                moment(a.date).format("YYYYMMDD")
-            )
+            .sort((a, b) => b.id - a.id)
             .map((log) => (
               <tr key={log.id}>
                 <td>{log.date}</td>
@@ -38,6 +34,11 @@ const Logs = () => {
                 </td>
               </tr>
             ))}
+          {!logs.length && (
+            <tr>
+              <td>No logs</td>
+            </tr>
+          )}
         </tbody>
       </table>
     </>
