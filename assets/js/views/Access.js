@@ -1,15 +1,17 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import useFetch from "../api/useFetch"
 import Add from "./Access/Add"
 import Delete from "./Access/Delete"
 import Edit from "./Access/Edit"
+import Search from "./Access/Search"
 
 const Access = () => {
-  const [access, refresh] = useFetch("access")
+  const [access, refresh, filteredAccess, setFilteredAccess] = useFetch("access")
 
   return (
     <>
       <h2 className="title">Access</h2>
+      <Search access={access} setAccess={setFilteredAccess} />
       <div className="columns">
         <div className="column is-8">
           <div className="panel panel--table">
@@ -22,13 +24,13 @@ const Access = () => {
                   <th>
                     Name
                   </th>
-                  <th>
+                  <th className="col-buttons-2">
                     Actions
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {access.map(item => (
+                {filteredAccess.map(item => (
                   <tr key={item.id}>
                     <td>
                       {item.id}

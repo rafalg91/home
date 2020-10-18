@@ -16,18 +16,18 @@ const Workers = () => {
     .then((res) => res.json())
     .then((json) => {
       setWorkerList(json)
+      setFilteredWorkers(json)
     })
   }, [])
-
-  useEffect(() => {
-    setFilteredWorkers(workerList)
-  }, [workerList])
 
   return (
     <>
       <h2 className="title">Workers</h2>
-      <Search workers={workerList} setWorkers={setFilteredWorkers} />
-      <div className="panelss">
+      <div class="row row--between">
+        <Search workers={workerList} setWorkers={setFilteredWorkers} setFilteredWorkers={setFilteredWorkers} />
+        <Add setWorkerList={setWorkerList} setFilteredWorkers={setFilteredWorkers} />
+      </div>
+      <div>
         <div className="panel panel--table">
           <table className="table">
             <thead>
@@ -37,7 +37,7 @@ const Workers = () => {
                 <th>Surname</th>
                 <th>Skills</th>
                 <th>Access</th>
-                <th>Actions</th>
+                <th className="col-buttons">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -46,9 +46,6 @@ const Workers = () => {
               ))}
             </tbody>
           </table>
-        </div>
-        <div className="panel">
-          <Add setWorkerList={setWorkerList} />
         </div>
       </div>
     </>

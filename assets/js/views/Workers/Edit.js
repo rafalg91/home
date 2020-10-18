@@ -39,7 +39,7 @@ const Edit = ({ setWorker, name, surname, id }) => {
           <form onSubmit={formik.handleSubmit}>
             <header className="modal-card-head">
               <p className="modal-card-title">Edit Worker</p>
-              <button className="delete" aria-label="close" onClick={() => setModal(false)}></button>
+              <button type="button" className="delete" aria-label="close" onClick={() => setModal(false)}></button>
             </header>
             <section className="modal-card-body">
               <div className="field">
@@ -71,7 +71,7 @@ const Edit = ({ setWorker, name, surname, id }) => {
             </section>
             <footer className="modal-card-foot">
               <button type="submit" className="button is-success">Save changes</button>
-              <button className="button" onClick={() => setModal(false)}>Cancel</button>
+              <button type="button" className="button" onClick={() => setModal(false)}>Cancel</button>
             </footer>
           </form>
         </div>

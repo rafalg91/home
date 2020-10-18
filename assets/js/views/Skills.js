@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import Add from "./Skills/Add"
 import Search from "./Skills/Search"
 import Edit from "./Skills/Edit"
+import useFetch from "../api/useFetch"
 
 const Skills = () => {
   const [skillList, setSkillList] = useState([])
@@ -12,12 +13,9 @@ const Skills = () => {
     .then((res) => res.json())
     .then((json) => {
       setSkillList(json)
+      setFilteredSkills(json)
     })
   }, [])
-
-  useEffect(() => {
-    setFilteredSkills(skillList)
-  }, [skillList])
 
   const deleteSkill = (id) => {
     fetch(`/api/skills/${id}`, {
@@ -42,7 +40,7 @@ const Skills = () => {
               <tr>
                 <th>#</th>
                 <th>Name</th>
-                <th>Actions</th>
+                <th className="col-buttons-2">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -52,18 +50,18 @@ const Skills = () => {
                   <td>{skill.name}</td>
                   <td>
                     <div className="buttons">
-                      <button
-                        className="button is-danger is-small"
-                        onClick={() => deleteSkill(skill.id)}
-                      >
-                        Delete
-                      </button>
                       <Edit
                         setSkillList={setSkillList}
                         id={skill.id}
                         name={skill.name}
                         surname={skill.surname}
                       />
+                      <button
+                        className="button is-danger is-small"
+                        onClick={() => deleteSkill(skill.id)}
+                      >
+                        Delete
+                      </button>
                     </div>
                   </td>
                 </tr>

@@ -35,7 +35,7 @@ const Edit = ({ name, id, refresh }) => {
           <form onSubmit={formik.handleSubmit}>
             <header className="modal-card-head">
               <p className="modal-card-title">Edit Skill</p>
-              <button className="delete" aria-label="close" onClick={() => setModal(false)}></button>
+              <button type="button" className="delete" aria-label="close" onClick={() => setModal(false)}></button>
             </header>
             <section className="modal-card-body">
               <div className="field">
@@ -56,7 +56,7 @@ const Edit = ({ name, id, refresh }) => {
               <button type="submit" className={classNames("button is-success", {"is-loading": formik.isSubmitting,})}>
                 Save changes
               </button>
-              <button className="button" onClick={() => setModal(false)}>Cancel</button>
+              <button type="button" className="button" onClick={() => setModal(false)}>Cancel</button>
             </footer>
           </form>
         </div>

@@ -1,6 +1,6 @@
 import React from "react"
 
-const Search = ({ workers, setWorkers }) => {
+const Search = ({ workers, setWorkers, setFilteredWorkers }) => {
 
   const searchWorkers = (e) => {
     e.preventDefault()
@@ -12,6 +12,7 @@ const Search = ({ workers, setWorkers }) => {
     })
 
     setWorkers(filteredWorkers)
+    setFilteredWorkers(filteredWorkers)
   }
 
   return (

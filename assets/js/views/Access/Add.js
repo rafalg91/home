@@ -60,13 +60,7 @@ const Add = ({ refresh }) => {
         </div>
         <div className="field">
           <div className="control mt-5">
-            <button
-              type="submit"
-              className={classNames("button is-primary", {
-                "is-loading": formik.isSubmitting,
-              })}
-              disabled={formik.isSubmitting}
-            >
+            <button type="submit" className={classNames("button is-primary", {"is-loading": formik.isSubmitting,})} disabled={formik.isSubmitting}>
               Add Access
             </button>
           </div>

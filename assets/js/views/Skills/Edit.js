@@ -57,7 +57,7 @@ const Edit = ({ setSkillList, name, id }) => {
             </section>
             <footer className="modal-card-foot">
               <button type="submit" className="button is-success">Save changes</button>
-              <button className="button" onClick={() => setModal(false)}>Cancel</button>
+              <button type="button" className="button" onClick={() => setModal(false)}>Cancel</button>
             </footer>
           </form>
         </div>

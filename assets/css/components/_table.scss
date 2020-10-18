@@ -14,6 +14,14 @@
       padding: gutter(2);
       border: 0;
       color: $primary;
+
+      &.col-buttons {
+        width: 350px;
+
+        &-2 {
+          width: 200px;
+        }
+      }
     }
   }
 
