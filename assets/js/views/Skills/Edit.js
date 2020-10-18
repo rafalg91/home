@@ -2,6 +2,17 @@ import React, {useState} from 'react'
 import classNames from "classnames/dedupe"
 import { useFormik } from 'formik';
 
+const validate = (values) => {
+  const errors = {};
+  if (/^ *$/.test(values.name)) {
+    errors.name = 'Required';
+  } else if (values.name.length < 2) {
+    errors.name = 'Must be at least 2 characters';
+  }
+
+  return errors;
+};
+
 const Edit = ({ name, id, refresh }) => {
   const [modal, setModal] = useState(false)
 
@@ -17,6 +28,7 @@ const Edit = ({ name, id, refresh }) => {
     initialValues: {
       name: name,
     },
+    validate,
     onSubmit: async (values) => {
       await editSkill(values)
       refresh()
@@ -43,13 +55,14 @@ const Edit = ({ name, id, refresh }) => {
                 <div className="control">
                   <input
                     name="name"
-                    className="input"
+                    className={classNames('input', {'is-danger': formik.errors.name})}
                     placeholder="Name..."
                     type="text"
                     onChange={formik.handleChange}
                     value={formik.values.name}
                   />
                 </div>
+                {formik.errors.name ? <p className="help is-danger">{formik.errors.name}</p> : null}
               </div>
             </section>
             <footer className="modal-card-foot">

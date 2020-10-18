@@ -2,6 +2,23 @@ import React, {useState} from 'react'
 import classNames from "classnames/dedupe"
 import { useFormik } from 'formik';
 
+const validate = (values) => {
+  const errors = {}
+  if (/^ *$/.test(values.name)) {
+    errors.name = "Required"
+  } else if (values.name.length < 2) {
+    errors.name = "Must be at least 2 characters"
+  }
+
+  if (/^ *$/.test(values.surname)) {
+    errors.surname = "Required"
+  } else if (values.surname.length < 2) {
+    errors.surname = "Must be at least 2 characters"
+  }
+
+  return errors
+}
+
 const Edit = ({ setWorker, name, surname, id }) => {
   const [modal, setModal] = useState(false)
 
@@ -22,6 +39,7 @@ const Edit = ({ setWorker, name, surname, id }) => {
       name: name,
       surname: surname,
     },
+    validate,
     onSubmit: (values) => {
       editWorker(values)
       setModal(false)
@@ -47,26 +65,36 @@ const Edit = ({ setWorker, name, surname, id }) => {
                 <div className="control">
                   <input
                     name="name"
-                    className="input"
+                    className={classNames("input", {
+                      "is-danger": formik.errors.name,
+                    })}
                     placeholder="Name..."
                     type="text"
                     onChange={formik.handleChange}
                     value={formik.values.name}
                   />
                 </div>
+                {formik.errors.name ? (
+                    <p className="help is-danger">{formik.errors.name}</p>
+                ) : null}
               </div>
               <div className="field">
                 <label htmlFor="surname" className="label">Surname</label>
                 <div className="control">
                   <input
                     name="surname"
-                    className="input"
+                    className={classNames("input", {
+                      "is-danger": formik.errors.surname,
+                    })}
                     placeholder="surname..."
                     type="text"
                     onChange={formik.handleChange}
                     value={formik.values.surname}
                   />
                 </div>
+                {formik.errors.surname ? (
+                    <p className="help is-danger">{formik.errors.surname}</p>
+                ) : null}
               </div>
             </section>
             <footer className="modal-card-foot">
