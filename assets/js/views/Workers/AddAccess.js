@@ -1,19 +1,19 @@
 import React, { useState } from "react"
 import classNames from "classnames/dedupe"
 
-const AddSkill = ({ getSkills, worker, setWorker }) => {
+const AddSkill = ({ getAccess, worker, setWorker }) => {
   const [dropdown, setDropdown] = useState(false)
 
-  const add = (e, skill) => {
+  const add = (e, access) => {
     e.preventDefault()
     setDropdown(false)
 
     const data = {
-      skill: skill,
+      access: access,
       worker: worker
     }
 
-    fetch(`/api/workers/add_skill`, {
+    fetch(`/api/workers/add_access`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
@@ -34,22 +34,22 @@ const AddSkill = ({ getSkills, worker, setWorker }) => {
   }
 
   return (
-    <div className={classNames("dropdown", { "is-active": dropdown })}>
+    <div className={classNames("dropdown ml-2", { "is-active": dropdown })}>
       <div className="dropdown-trigger">
         <button
-          className="button is-link is-small"
+          className="button is-success is-small"
           aria-haspopup="true"
           aria-controls="dropdown-menu"
           onClick={activeDropdown}
         >
-          <span>Add skill</span>
+          <span>Add access</span>
         </button>
       </div>
       <div className="dropdown-menu" id="dropdown-menu" role="menu">
         <div className="dropdown-content">
-          {getSkills.map((skill) => (
-            <a href="#" className="dropdown-item" key={skill.id} onClick={(e) => add(e, skill.id)}>
-              {skill.name}
+          {getAccess.map((item) => (
+            <a href="#" className="dropdown-item" key={item.id} onClick={(e) => add(e, item.id)}>
+              {item.name}
             </a>
           ))}
         </div>

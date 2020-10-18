@@ -47,9 +47,9 @@ const Workers = () => {
             </tbody>
           </table>
         </div>
-        {/* <div className="panel">
+        <div className="panel">
           <Add setWorkerList={setWorkerList} />
-        </div> */}
+        </div>
       </div>
     </>
   )

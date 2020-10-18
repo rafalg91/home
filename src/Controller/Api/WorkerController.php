@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Worker;
 use App\Entity\Skill;
 use App\Entity\Access;
@@ -77,7 +78,7 @@ class WorkerController extends AbstractController
      * @Route("/api/workers/add_skill", format="json", name="addworkerskill")
      * @Method("POST")
      */
-    public function addSkills(Request $request)
+    public function addSkill(Request $request)
     {
         $request->getContent();
         $id_worker = $request->get('worker');
@@ -89,7 +90,23 @@ class WorkerController extends AbstractController
         $worker->addSkill($skill);
         $em->flush();
 
-        //$skills = $worker->getSkills()->toArray();
+        return new JsonResponse($worker);
+    }
+
+    /**
+     * @Route("/api/workers/add_access", format="json", name="addworkeraccess")
+     * @Method("POST")
+     */
+    public function addAccess(Request $request, EntityManagerInterface $em)
+    {
+        $request->getContent();
+        $id_worker = $request->get('worker');
+        $id_access = $request->get('access');
+
+        $worker = $em->getRepository(Worker::class)->find($id_worker);
+        $access = $em->getRepository(Access::class)->find($id_access);
+        $worker->addAccess($access);
+        $em->flush();
 
         return new JsonResponse($worker);
     }

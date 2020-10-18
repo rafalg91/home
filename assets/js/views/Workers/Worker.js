@@ -4,6 +4,7 @@ import Delete from "./Delete"
 import Skills from "./Skills"
 import Access from "./Access"
 import AddSkill from "./AddSkill"
+import AddAccess from "./AddAccess"
 
 const Worker = ({ data, getSkills, getAccess }) => {
   const [worker, setWorker] = useState(data)
@@ -26,6 +27,7 @@ const Worker = ({ data, getSkills, getAccess }) => {
               <Edit id={worker.id} name={worker.name} surname={worker.surname} setWorker={setWorker}/>
               <Delete id={worker.id} setWorker={setWorker} />
               <AddSkill worker={worker.id} setWorker={setWorker} getSkills={getSkills} />
+              <AddAccess worker={worker.id} setWorker={setWorker} getAccess={getAccess} />
             </div>
           </td>
         </tr>
