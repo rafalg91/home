@@ -2,7 +2,7 @@ import React from "react"
 import { useFormik } from 'formik';
 import classNames from "classnames/dedupe"
 
-const validate = values => {
+const validate = (values) => {
   const errors = {};
   if (/^ *$/.test(values.name)) {
     errors.name = 'Required';
@@ -13,16 +13,12 @@ const validate = values => {
   return errors;
 };
 
-const Add = ({ setSkillList }) => {
+const Add = ({ refresh }) => {
   const addSkill = (data) => {
-    fetch("/api/skills/add", {
+    return fetch("/api/skills/add", {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
-    })
-    .then((res) => res.json())
-    .then((json) => {
-      setSkillList(json)
     })
   }
 
@@ -31,9 +27,10 @@ const Add = ({ setSkillList }) => {
       name: '',
     },
     validate,
-    onSubmit: (values, { resetForm }) => {
-      addSkill(values)
+    onSubmit: async (values, { resetForm }) => {
+      await addSkill(values)
       resetForm()
+      refresh()
     }
   })
 

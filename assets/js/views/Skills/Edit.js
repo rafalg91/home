@@ -2,18 +2,14 @@ import React, {useState} from 'react'
 import classNames from "classnames/dedupe"
 import { useFormik } from 'formik';
 
-const Edit = ({ setSkillList, name, id }) => {
+const Edit = ({ name, id, refresh }) => {
   const [modal, setModal] = useState(false)
 
   const editSkill = (data) => {
-    fetch(`/api/skills/${id}/edit`, {
+    return fetch(`/api/skills/${id}/edit`, {
       method: "PATCH",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
-    })
-    .then(res => res.json())
-    .then(json => {
-      setSkillList(json)
     })
   }
 
@@ -21,8 +17,9 @@ const Edit = ({ setSkillList, name, id }) => {
     initialValues: {
       name: name,
     },
-    onSubmit: (values) => {
-      editSkill(values)
+    onSubmit: async (values) => {
+      await editSkill(values)
+      refresh()
       setModal(false)
     }
   })
@@ -38,7 +35,7 @@ const Edit = ({ setSkillList, name, id }) => {
           <form onSubmit={formik.handleSubmit}>
             <header className="modal-card-head">
               <p className="modal-card-title">Edit Skill</p>
-              <button className="delete" aria-label="close" onClick={() => setModal(false)}></button>
+              <button type="button" className="delete" aria-label="close" onClick={() => setModal(false)}></button>
             </header>
             <section className="modal-card-body">
               <div className="field">
@@ -56,7 +53,9 @@ const Edit = ({ setSkillList, name, id }) => {
               </div>
             </section>
             <footer className="modal-card-foot">
-              <button type="submit" className="button is-success">Save changes</button>
+              <button type="submit" className={classNames("button is-success", {"is-loading": formik.isSubmitting,})}>
+                Save changes
+              </button>
               <button type="button" className="button" onClick={() => setModal(false)}>Cancel</button>
             </footer>
           </form>

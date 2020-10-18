@@ -34,27 +34,31 @@ const AddSkill = ({ getSkills, worker, setWorker }) => {
   }
 
   return (
-    <div className={classNames("dropdown", { "is-active": dropdown })}>
-      <div className="dropdown-trigger">
-        <button
-          className="button is-link is-small"
-          aria-haspopup="true"
-          aria-controls="dropdown-menu"
-          onClick={activeDropdown}
-        >
-          <span>Add skill</span>
-        </button>
-      </div>
-      <div className="dropdown-menu" id="dropdown-menu" role="menu">
-        <div className="dropdown-content">
-          {getSkills.map((skill) => (
-            <a href="#" className="dropdown-item" key={skill.id} onClick={(e) => add(e, skill.id)}>
-              {skill.name}
-            </a>
-          ))}
+    <>
+      {getSkills.length ? (
+        <div className={classNames("dropdown", { "is-active": dropdown })}>
+          <div className="dropdown-trigger">
+            <button
+              className="button is-link is-small"
+              aria-haspopup="true"
+              aria-controls="dropdown-menu"
+              onClick={activeDropdown}
+            >
+              <span>Add skill</span>
+            </button>
+          </div>
+          <div className="dropdown-menu" id="dropdown-menu" role="menu">
+            <div className="dropdown-content">
+              {getSkills.map((skill) => (
+                <a href="#" className="dropdown-item" key={skill.id} onClick={(e) => add(e, skill.id)}>
+                  {skill.name}
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      ) : null}
+    </>
   )
 }
 

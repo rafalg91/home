@@ -46,6 +46,11 @@ const Access = () => {
                     </td>
                   </tr>
                 ))}
+                {!filteredAccess.length && (
+                  <tr>
+                    <td>No Access</td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>

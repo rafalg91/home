@@ -44,6 +44,11 @@ const Workers = () => {
               {filteredWorkers.map((worker) => (
                 <Worker key={worker.id} data={worker} getSkills={getSkills} getAccess={getAccess} />
               ))}
+              {!filteredWorkers.length && (
+                <tr>
+                  <td>No Access</td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
