@@ -34,8 +34,9 @@ const Skills = () => {
     <>
       <h2 className="title">Skills</h2>
       <Search skills={skillList} setSkills={setFilteredSkills} />
-      <div className="panels">
-        <div className="panel panel--table">
+      <div className="columns">
+        <div className="column is-8">
+          <div className="panel panel--table">
           <table className="table">
             <thead>
               <tr>
@@ -70,8 +71,11 @@ const Skills = () => {
             </tbody>
           </table>
         </div>
-        <div className="panel">
-          <Add setSkillList={setSkillList} />
+        </div>
+        <div className="column is-auto">
+          <div className="panel">
+            <Add setSkillList={setSkillList} />
+          </div>
         </div>
       </div>
     </>

@@ -26,7 +26,7 @@ class Access implements JsonSerializable
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Log::class, mappedBy="access")
+     * @ORM\OneToMany(targetEntity=Log::class, mappedBy="access", cascade={"remove"})
      */
     private $log;
 

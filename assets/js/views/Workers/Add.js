@@ -1,5 +1,6 @@
 import React from "react"
 import { useFormik } from 'formik';
+import classNames from "classnames/dedupe"
 
 const Add = ({ setWorkerList }) => {
   const addWorker = (data) => {
@@ -57,7 +58,7 @@ const Add = ({ setWorkerList }) => {
         </div>
         <div className="field">
           <div className="control mt-5">
-            <button type="submit" className="button is-primary">
+            <button type="submit" className={classNames('button is-primary', {'is-loading': formik.isSubmitting})} disabled={formik.isSubmitting}>
               Add worker
             </button>
           </div>

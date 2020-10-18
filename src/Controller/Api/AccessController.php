@@ -61,7 +61,7 @@ class AccessController extends AbstractController
 	}
 
 	/**
-	 * @Route("/api/access/{id}/remove", name="remoweAccess")
+	 * @Route("/api/access/{id}", name="remoweAccess")
 	 * @Method("DELETE")
 	 */
 	public function removeAccess($id, EntityManagerInterface $en)

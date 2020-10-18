@@ -36,7 +36,7 @@ class Worker implements JsonSerializable
     private $skills;
 
     /**
-     * @ORM\OneToMany(targetEntity=Log::class, mappedBy="worker")
+     * @ORM\OneToMany(targetEntity=Log::class, mappedBy="worker", cascade={"remove"})
      */
     private $Logs;
 

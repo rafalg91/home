@@ -12,14 +12,16 @@ const Access = ({access, worker, setWorker}) => {
   }
 
   return (
-    <div className="tags">
-      {access.map((item) => (
-        <span className="tag is-success" key={item.id}>
-          {item.name}
-          <button className="delete is-small" onClick={() => remove(item.id)}></button>
-        </span>
-      ))}
-    </div>
+    <>
+      <div className="tags">
+        {access.map((item) => (
+          <span className="tag is-success" key={item.id}>
+            {item.name}
+            <button className="delete is-small" onClick={() => remove(item.id)}></button>
+          </span>
+        ))}
+      </div>
+    </>
   )
 }
 

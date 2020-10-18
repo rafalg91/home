@@ -22,29 +22,11 @@
 @import "components/panels";
 @import "components/table";
 @import "components/form";
+@import "components/icon";
+@import "components/search";
 
 // layouts
 @import "layouts/sidebar";
 @import "layouts/nav";
 @import "layouts/main";
 
-$primary: #3273dc;
-
-.is-primary {
-  color: $primary;
-}
-
-.search {
-  max-width: 300px;
-}
-
-.is-plus {
-  cursor: pointer;
-  padding: 5px !important;
-  font-weight: bold;
-  height: 20px !important;
-
-  &:hover {
-    opacity: 0.9;
-  }
-}
