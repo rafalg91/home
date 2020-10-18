@@ -23,7 +23,7 @@ const Workers = () => {
   return (
     <>
       <h2 className="title">Workers</h2>
-      <div class="row row--between">
+      <div className="row row--between">
         <Search workers={workerList} setWorkers={setFilteredWorkers} setFilteredWorkers={setFilteredWorkers} />
         <Add setWorkerList={setWorkerList} setFilteredWorkers={setFilteredWorkers} />
       </div>
@@ -32,7 +32,7 @@ const Workers = () => {
           <table className="table">
             <thead>
               <tr>
-                <th>#</th>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Surname</th>
                 <th>Skills</th>

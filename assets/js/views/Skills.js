@@ -18,7 +18,7 @@ const Skills = () => {
           <table className="table">
             <thead>
               <tr>
-                <th>#</th>
+                <th>iID</th>
                 <th>Name</th>
                 <th className="col-buttons-2">Actions</th>
               </tr>
