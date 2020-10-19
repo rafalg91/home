@@ -179,4 +179,13 @@ class Worker implements JsonSerializable
 
         return $this;
     }
+
+    public function containAccess(Access $access)
+    {
+        if ($this->access->contains($access)) {
+            return true;
+        }
+
+        return false;
+    }
 }

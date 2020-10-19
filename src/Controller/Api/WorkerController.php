@@ -116,16 +116,19 @@ class WorkerController extends AbstractController
 
         $worker = $em->getRepository(Worker::class)->find($id_worker);
         $access = $em->getRepository(Access::class)->find($id_access);
-        $worker->addAccess($access);
 
-        $log = new Log();
-        $log->setDate($date);
-        $log->setAccess($access);
-        $log->setWorker($worker);
-        $log->setStatus(true);
+        if(!$worker->containAccess($access)) {
+            $worker->addAccess($access);
 
-        $em->persist($log);
-        $em->flush();
+            $log = new Log();
+            $log->setDate($date);
+            $log->setAccess($access);
+            $log->setWorker($worker);
+            $log->setStatus(true);
+
+            $em->persist($log);
+            $em->flush();
+        }
 
         return new JsonResponse($worker);
     }
